@@ -41,7 +41,7 @@ public class CampaignDtoConverter {
                 campaign.getId(),
                 campaign.getName(),
                 campaign.getKeyword(),
-                campaign.getBigAmount(),
+                campaign.getBidAmount(),
                 campaign.getCampaignFound(),
                 campaign.getStatus(),
                 campaign.getTown(),

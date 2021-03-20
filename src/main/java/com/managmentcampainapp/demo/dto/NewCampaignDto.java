@@ -9,7 +9,7 @@ public class NewCampaignDto {
 
     private String keyword;
 
-    private Long bigAmount;
+    private Long bidAmount;
 
     private Long campaignFound;
 
@@ -22,14 +22,14 @@ public class NewCampaignDto {
     @JsonCreator
     public NewCampaignDto(@JsonProperty("name") String name,
                           @JsonProperty("keyword") String keyword,
-                          @JsonProperty("bigAmount") Long bigAmount,
+                          @JsonProperty("bidAmount") Long bidAmount,
                           @JsonProperty("campaignFound") Long campaignFound,
                           @JsonProperty("status") String status,
                           @JsonProperty("town") String town,
                           @JsonProperty("radius") Long radius) {
         this.name = name;
         this.keyword = keyword;
-        this.bigAmount = bigAmount;
+        this.bidAmount = bidAmount;
         this.campaignFound = campaignFound;
         this.status = status;
         this.town = town;
@@ -53,11 +53,11 @@ public class NewCampaignDto {
     }
 
     public Long getBigAmount() {
-        return bigAmount;
+        return bidAmount;
     }
 
-    public void setBigAmount(Long bigAmount) {
-        this.bigAmount = bigAmount;
+    public void setBigAmount(Long bidAmount) {
+        this.bidAmount = bidAmount;
     }
 
     public Long getCampaignFound() {

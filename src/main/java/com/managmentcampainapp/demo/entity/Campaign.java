@@ -1,28 +1,41 @@
 package com.managmentcampainapp.demo.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Campaign {
 
+    private static int budget = 10_000;
 
     @Id
     @SequenceGenerator(name = "product_id_generator", initialValue = 10, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_id_generator")
     private Long id;
 
+    @NotNull
+    @Column(unique = true)
     private String name;
 
+    @NotNull
     private String keyword;
 
-    private Long bigAmount;
+    @NotNull
+    @Min(value = 0)
+    private Long bidAmount;
 
+    @NotNull
+    @Min(value = 0)
     private Long campaignFound;
 
+    @NotNull
     private String status;
 
+    @NotNull
     private String town;
 
+    @NotNull
     private Long radius;
 
 
@@ -31,7 +44,7 @@ public class Campaign {
 
     public Campaign(Long id, String name,
                     String keyword,
-                    Long bigAmount,
+                    Long bidAmount,
                     Long campaignFound,
                     String status,
                     String town,
@@ -39,7 +52,7 @@ public class Campaign {
         this.id = id;
         this.name = name;
         this.keyword = keyword;
-        this.bigAmount = bigAmount;
+        this.bidAmount = bidAmount;
         this.campaignFound = campaignFound;
         this.status = status;
         this.town = town;
@@ -48,20 +61,19 @@ public class Campaign {
 
     public Campaign(String name,
                     String keyword,
-                    Long bigAmount,
+                    Long bidAmount,
                     Long campaignFound,
                     String status,
                     String town,
                     Long radius) {
         this.name = name;
         this.keyword = keyword;
-        this.bigAmount = bigAmount;
+        this.bidAmount = bidAmount;
         this.campaignFound = campaignFound;
         this.status = status;
         this.town = town;
         this.radius = radius;
     }
-
 
     public Long getId() {
         return id;
@@ -87,12 +99,12 @@ public class Campaign {
         this.keyword = keyword;
     }
 
-    public Long getBigAmount() {
-        return bigAmount;
+    public Long getBidAmount() {
+        return bidAmount;
     }
 
-    public void setBigAmount(Long bigAmount) {
-        this.bigAmount = bigAmount;
+    public void setBidAmount(Long bidAmount) {
+        this.bidAmount = bidAmount;
     }
 
     public Long getCampaignFound() {
@@ -125,5 +137,17 @@ public class Campaign {
 
     public void setRadius(Long radius) {
         this.radius = radius;
+    }
+
+    public static void increaseBudget(Long amount){
+        budget+= amount;
+    }
+
+    public static void decreaseBudget(Long amount){
+        budget-= amount;
+    }
+
+    public static int getBudget() {
+        return budget;
     }
 }

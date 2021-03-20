@@ -21,36 +21,57 @@ public class CampaignServiceImpl implements CampaignService {
     }
 
     @Override
-    public Campaign findCampaignById(Long id) {
-        return campaignRepository.findById(id)
-                .orElseThrow(() -> new IdNotFoundException(id, Campaign.class.getSimpleName()));
-    }
-
-    @Override
-    public List<Campaign> findAllCampaigns(Long id) {
-        return (List<Campaign>) campaignRepository.findAll();
-    }
-
-    @Override
-    public void updateCampaign(CampaignDto campaignDto) {
-        campaignRepository.save(
-                CampaignDtoConverter.CampaignDtoConvertToCampaign(campaignDto)
+    public CampaignDto findCampaignById(Long id) {
+        return CampaignDtoConverter.CampaignConvertToCampaignDto(
+                campaignRepository.findById(id)
+                        .orElseThrow(() -> new IdNotFoundException(id, Campaign.class.getSimpleName()))
         );
     }
 
     @Override
+    public List<CampaignDto> findAllCampaigns() {
+        return CampaignDtoConverter.
+                CampaignListConvertToCampaignDtoList((List<Campaign>) campaignRepository.findAll());
+    }
+
+    @Override
+    public void updateCampaign(CampaignDto campaignDto) {
+        Long id = campaignDto.getId();
+        if(id ==null){
+            throw new IdNotFoundException("Id can't be null");
+        }
+        Long charging = campaignDto.getBigAmount();
+        Long refund = campaignRepository.findById(id)
+
+                .orElseThrow(() -> new IdNotFoundException(id, Campaign.class.getSimpleName()))
+                .getBidAmount();
+        campaignRepository.save(
+                CampaignDtoConverter.CampaignDtoConvertToCampaign(campaignDto));
+
+        Campaign.decreaseBudget(charging);
+        Campaign.increaseBudget(refund);
+    }
+
+    @Override
     public void deleteCampaign(Long id) {
+        Long refund = findCampaignById(id).getBigAmount();
         try {
             campaignRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
             throw new IdNotFoundException(id, Campaign.class.getSimpleName());
         }
+
+        Campaign.increaseBudget(refund);
+
     }
 
     @Override
     public void addCampaign(NewCampaignDto newCampaignDto) {
+        Long charging = newCampaignDto.getBigAmount();
         campaignRepository.save(
                 CampaignDtoConverter.NewCampaignDtoConvertToCampaign(newCampaignDto)
         );
+
+        Campaign.decreaseBudget(charging);
     }
 }
