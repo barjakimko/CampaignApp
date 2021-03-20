@@ -4,8 +4,6 @@ import com.managmentcampainapp.demo.entity.Campaign;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigDecimal;
-
 @Repository
 public interface CampaignRepository extends CrudRepository<Campaign, Long> {
 }

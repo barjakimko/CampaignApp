@@ -37,7 +37,7 @@ public class CampaignServiceImpl implements CampaignService {
     @Override
     public void updateCampaign(CampaignDto campaignDto) {
         Long id = campaignDto.getId();
-        if(id ==null){
+        if (id == null) {
             throw new IdNotFoundException("Id can't be null");
         }
         Long charging = campaignDto.getBigAmount();

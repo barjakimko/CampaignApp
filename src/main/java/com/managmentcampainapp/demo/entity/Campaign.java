@@ -139,12 +139,12 @@ public class Campaign {
         this.radius = radius;
     }
 
-    public static void increaseBudget(Long amount){
-        budget+= amount;
+    public static void increaseBudget(Long amount) {
+        budget += amount;
     }
 
-    public static void decreaseBudget(Long amount){
-        budget-= amount;
+    public static void decreaseBudget(Long amount) {
+        budget -= amount;
     }
 
     public static int getBudget() {
