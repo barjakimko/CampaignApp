@@ -1,0 +1,8 @@
+CREATE TABLE CAMPAIGN (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(250) NOT NULL,
+    town VARCHAR(250) NOT NULL
+);
+INSERT INTO CAMPAIGN (name, town) VALUES
+('bar', 'osw'),
+('mar', 'osw');
