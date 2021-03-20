@@ -1,15 +1,9 @@
-package com.managmentcampainapp.demo.entity;
+package com.managmentcampainapp.demo.dto;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Entity
-public class Campaign {
-
-
-    @Id
-    @SequenceGenerator(name = "product_id_generator", initialValue = 10, allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_id_generator")
-    private Long id;
+public class NewCampaignDto {
 
     private String name;
 
@@ -25,18 +19,14 @@ public class Campaign {
 
     private Long radius;
 
-
-    public Campaign() {
-    }
-
-    public Campaign(Long id, String name,
-                    String keyword,
-                    Long bigAmount,
-                    Long campaignFound,
-                    String status,
-                    String town,
-                    Long radius) {
-        this.id = id;
+    @JsonCreator
+    public NewCampaignDto(@JsonProperty("name") String name,
+                          @JsonProperty("keyword") String keyword,
+                          @JsonProperty("bigAmount") Long bigAmount,
+                          @JsonProperty("campaignFound") Long campaignFound,
+                          @JsonProperty("status") String status,
+                          @JsonProperty("town") String town,
+                          @JsonProperty("radius") Long radius) {
         this.name = name;
         this.keyword = keyword;
         this.bigAmount = bigAmount;
@@ -44,31 +34,6 @@ public class Campaign {
         this.status = status;
         this.town = town;
         this.radius = radius;
-    }
-
-    public Campaign(String name,
-                    String keyword,
-                    Long bigAmount,
-                    Long campaignFound,
-                    String status,
-                    String town,
-                    Long radius) {
-        this.name = name;
-        this.keyword = keyword;
-        this.bigAmount = bigAmount;
-        this.campaignFound = campaignFound;
-        this.status = status;
-        this.town = town;
-        this.radius = radius;
-    }
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {

@@ -1,14 +1,11 @@
-package com.managmentcampainapp.demo.entity;
-
-import javax.persistence.*;
-
-@Entity
-public class Campaign {
+package com.managmentcampainapp.demo.dto;
 
 
-    @Id
-    @SequenceGenerator(name = "product_id_generator", initialValue = 10, allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_id_generator")
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class CampaignDto {
+
     private Long id;
 
     private String name;
@@ -25,34 +22,16 @@ public class Campaign {
 
     private Long radius;
 
-
-    public Campaign() {
-    }
-
-    public Campaign(Long id, String name,
-                    String keyword,
-                    Long bigAmount,
-                    Long campaignFound,
-                    String status,
-                    String town,
-                    Long radius) {
+    @JsonCreator
+    public CampaignDto(@JsonProperty("id") Long id,
+                       @JsonProperty("name") String name,
+                       @JsonProperty("keyword") String keyword,
+                       @JsonProperty("bigAmount") Long bigAmount,
+                       @JsonProperty("campaignFound") Long campaignFound,
+                       @JsonProperty("status") String status,
+                       @JsonProperty("town") String town,
+                       @JsonProperty("radius") Long radius) {
         this.id = id;
-        this.name = name;
-        this.keyword = keyword;
-        this.bigAmount = bigAmount;
-        this.campaignFound = campaignFound;
-        this.status = status;
-        this.town = town;
-        this.radius = radius;
-    }
-
-    public Campaign(String name,
-                    String keyword,
-                    Long bigAmount,
-                    Long campaignFound,
-                    String status,
-                    String town,
-                    Long radius) {
         this.name = name;
         this.keyword = keyword;
         this.bigAmount = bigAmount;
