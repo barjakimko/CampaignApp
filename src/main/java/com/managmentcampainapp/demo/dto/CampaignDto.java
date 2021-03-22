@@ -66,11 +66,11 @@ public class CampaignDto {
         this.keyword = keyword;
     }
 
-    public Long getBigAmount() {
+    public Long getBidAmount() {
         return bidAmount;
     }
 
-    public void setBigAmount(Long bidAmount) {
+    public void setBidAmount(Long bidAmount) {
         this.bidAmount = bidAmount;
     }
 

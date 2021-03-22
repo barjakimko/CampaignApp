@@ -40,7 +40,7 @@ public class CampaignServiceImpl implements CampaignService {
         if (id == null) {
             throw new IdNotFoundException("Id can't be null");
         }
-        Long charging = campaignDto.getBigAmount();
+        Long charging = campaignDto.getBidAmount();
         Long refund = campaignRepository.findById(id)
 
                 .orElseThrow(() -> new IdNotFoundException(id, Campaign.class.getSimpleName()))
@@ -54,7 +54,7 @@ public class CampaignServiceImpl implements CampaignService {
 
     @Override
     public void deleteCampaign(Long id) {
-        Long refund = findCampaignById(id).getBigAmount();
+        Long refund = findCampaignById(id).getBidAmount();
         try {
             campaignRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
@@ -67,7 +67,7 @@ public class CampaignServiceImpl implements CampaignService {
 
     @Override
     public void addCampaign(NewCampaignDto newCampaignDto) {
-        Long charging = newCampaignDto.getBigAmount();
+        Long charging = newCampaignDto.getBidAmount();
         campaignRepository.save(
                 CampaignDtoConverter.NewCampaignDtoConvertToCampaign(newCampaignDto)
         );

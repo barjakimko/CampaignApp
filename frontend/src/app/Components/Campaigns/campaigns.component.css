@@ -1,0 +1,125 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+table {
+  width: 100%;
+
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.test{
+  overflow: scroll;
+  max-height: 220px;
+}
+
+th{
+  position: sticky;
+}
+
+.delete-button {
+  background-color: white;
+}
+
+.description{
+  padding-right: 240px;
+}
+
+.example-container .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.ng-invalid.ng-dirty:not(form), .ng-invalid:not(form).form-submitted {
+  border: solid 0px;
+}
+
+.form_right {
+  margin-top: 25px;
+  display: flex;
+  grid-gap: 3px;
+  /*padding: 1% 5%;*/
+}
+
+
+.input_container {
+  background-color: #e5e5e5;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.input_container .mat-form-field{
+  font-size: 8pt;
+  float: right;
+  margin: 8px;
+}
+
+.input_container:hover {
+  background-color: #FFFACD;
+  transition: background-color, 1s;
+  cursor: pointer;
+}
+
+.input_container, #input_submit, .button{
+  height: 50px;
+  border-radius: 15px;
+  width: 12%;
+}
+
+.input_field {
+  color: #6b6b6b;
+  background-color: inherit;
+  width: 80%;
+  min-width: 200px;
+  border: none;
+  font-size: 1.3rem;
+  font-weight: 400;
+  padding-left: 30px;
+  font-family: sans-serif;
+}
+
+.input_field:hover,
+.input_field:focus, .button {
+  outline: none;
+}
+
+.button {
+  font-size: 20px;
+}
+
+#input_submit, .button {
+  background-color: gray;
+  padding-left: 0;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+}
+
+#input_submit:hover, .button:hover {
+  background-color: #b5e7a0;
+  transition: background-color, 1s;
+  cursor: pointer;
+}
+
+h1,
+h3,
+span {
+  text-align: center;
+}
+
+a {
+  text-decoration: underline;
+  color: gray;
+  font-weight: bold;
+}
+
+a:hover {
+  color: #b5e7a0;
+}
+
+i {
+  color: #6b6b6b;
+}
+
+

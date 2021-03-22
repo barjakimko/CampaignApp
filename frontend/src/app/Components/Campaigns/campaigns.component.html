@@ -1,0 +1,217 @@
+<h1>
+  Total budget: {{budget}}
+</h1>
+
+<table mat-table *ngIf="!!dataSource" [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- keyword Column -->
+  <ng-container matColumnDef="keyword">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Keywords </th>
+    <td mat-cell *matCellDef="let element"> {{element.keyword}} </td>
+  </ng-container>
+
+  <!-- keyword Column -->
+  <ng-container matColumnDef="bidAmount">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> BidAmount </th>
+    <td mat-cell *matCellDef="let element"> {{element.bidAmount}} </td>
+  </ng-container>
+
+  <!-- campaignFound Column -->
+  <ng-container matColumnDef="campaignFound">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> CampaignFound </th>
+    <td mat-cell *matCellDef="let element"> {{element.campaignFound}} </td>
+  </ng-container>
+
+  <!-- status Column -->
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+  </ng-container>
+
+  <!-- town Column -->
+  <ng-container matColumnDef="town">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Town </th>
+    <td mat-cell *matCellDef="let element"> {{element.town}} </td>
+  </ng-container>
+
+  <!-- radius Column -->
+  <ng-container matColumnDef="radius">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Radius </th>
+    <td mat-cell *matCellDef="let element"> {{element.radius}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef> Action </th>
+    <td mat-cell *matCellDef="let element" class="action-link">
+      <button (click)="openEditModule(element.id)">Edit</button> |
+      <button (click)="deleteCampaign(element.id)">Delete</button>
+    </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
+<div class="body-login">
+  <div id="form_add">
+
+    <form [formGroup]="addForm" (ngSubmit)="add()">
+      <div class="form_right">
+        <br>
+        <div class="input_container">
+          <mat-form-field [appearance]="form">
+            <input
+              matInput
+              placeholder="Name"
+              type="text"
+              name="Name"
+              id="field_name"
+              class="input_field"
+              [formControl]="name"
+              autocomplete="off"
+              required
+            />
+            <mat-error *ngIf="name.invalid">{{getErrorMessageName()}}</mat-error>
+            <mat-error *ngIf="name.hasError('duplicate')">Name must be unique</mat-error>
+            <mat-error *ngIf="name.hasError('nullValueName')">You must enter Name</mat-error>
+          </mat-form-field>
+        </div>
+        <br>
+        <div class="input_container">
+          <mat-form-field [appearance]="form">
+            <input
+              matInput
+              placeholder="keywords"
+              type="text"
+              name="Keywords"
+              id="field_keywords"
+              class="input_field"
+              [formControl]="keyword"
+              autocomplete="off"
+              required
+            />
+            <mat-error *ngIf="keyword.invalid">{{getErrorMessageKeyword()}}</mat-error>
+          </mat-form-field>
+        </div>
+        <br>
+        <div class="input_container">
+          <mat-form-field [appearance]="form">
+            <input
+              matInput
+              placeholder="Bid Amount"
+              type="number"
+              name="Bid Amount"
+              id="field_bid-amount"
+              class="input_field"
+              [formControl]="bidAmount"
+              autocomplete="off"
+              required
+            />
+            <mat-error *ngIf="bidAmount.invalid">{{getErrorMessageBidAmount()}}</mat-error>
+            <mat-error *ngIf="bidAmount.hasError('lower')">Value must be bigger than 0</mat-error>
+            <mat-error *ngIf="bidAmount.hasError('higher')">Value must be lower than budget</mat-error>
+            <mat-error *ngIf="bidAmount.hasError('nullValueBidAmount')">You must enter Bid Amount</mat-error>
+          </mat-form-field>
+        </div>
+        <br>
+
+        <div class="input_container">
+          <mat-form-field [appearance]="form">
+            <input
+              matInput
+              placeholder="Camp. Found"
+              type="number"
+              name="Campaign Found"
+              id="campaign-found"
+              class="input_field"
+              [formControl]="campaignFound"
+              autocomplete="off"
+              required
+            />
+            <mat-error *ngIf="campaignFound.invalid">{{getErrorMessageCampaignFound()}}</mat-error>
+          </mat-form-field>
+        </div>
+        <br>
+
+        <div class="input_container" >
+          <mat-form-field [appearance]="form">
+
+            <select matNativeControl required class="input_field" [formControl]="status" placeholder="On">
+              <option value="ON">On</option>
+              <option value="OFF">Off</option>
+            </select>
+
+          </mat-form-field>
+        </div>
+        <br>
+
+        <div class="input_container">
+          <mat-form-field [appearance]="form">
+            <select matNativeControl required class="input_field" [formControl]="town" placeholder="Białystok">
+              <option value="Białystok"> Białystok</option>
+              <option value="Bydgoszcz"> Bydgoszcz</option>
+              <option value="Gdańsk"> Gdańsk</option>
+              <option value="Katowice"> Katowice</option>
+              <option value="Kielce"> Kielce</option>
+              <option value="Kraków"> Kraków</option>
+              <option value="Lublin"> Lublin</option>
+              <option value="Łódź"> Łódź</option>
+              <option value="Olsztyn"> Olsztyn</option>
+              <option value="Opole"> Opole</option>
+              <option value="Poznań"> Poznań</option>
+              <option value="Rzeszów"> Rzeszów</option>
+              <option value="Szczecin"> Szczecin</option>
+              <option value="Warszawa"> Warszawa</option>
+              <option value="Wrocław"> Wrocław</option>
+              <option value="Zielona Góra"> Zielona</option>
+            </select>
+
+          </mat-form-field>
+        </div>
+        <br>
+
+        <div class="input_container">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Radius"
+              type="number"
+              name="Radius"
+              id="radius"
+              class="input_field"
+              [formControl]="radius"
+              autocomplete="off"
+              required
+            />
+            <mat-error *ngIf="radius.invalid">{{getErrorMessageRadius()}}</mat-error>
+          </mat-form-field>
+        </div>
+        <br>
+
+        <button mat-raised-button type="submit" class="button" class="button" [disabled]="!addForm.valid">Add</button>
+
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<app-update (campaignEdited)="update($event)" *ngIf="!!campaignToEdit" [campaignToEdit]= "campaignToEdit"
+            [campaignsList]="campaignsList">
+
+</app-update>

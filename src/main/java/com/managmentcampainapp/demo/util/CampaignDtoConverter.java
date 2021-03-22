@@ -16,7 +16,7 @@ public class CampaignDtoConverter {
                 campaignDto.getId(),
                 campaignDto.getName(),
                 campaignDto.getKeyword(),
-                campaignDto.getBigAmount(),
+                campaignDto.getBidAmount(),
                 campaignDto.getCampaignFound(),
                 campaignDto.getStatus(),
                 campaignDto.getTown(),
@@ -28,7 +28,7 @@ public class CampaignDtoConverter {
         return new Campaign(
                 newCampaignDto.getName(),
                 newCampaignDto.getKeyword(),
-                newCampaignDto.getBigAmount(),
+                newCampaignDto.getBidAmount(),
                 newCampaignDto.getCampaignFound(),
                 newCampaignDto.getStatus(),
                 newCampaignDto.getTown(),

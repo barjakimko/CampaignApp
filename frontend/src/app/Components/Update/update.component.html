@@ -1,0 +1,139 @@
+<div class="body-login">
+  <div id="form_edit">
+
+    <form [formGroup]="updateForm" (ngSubmit)="add()">
+      <div class="form_right">
+        <br>
+        <div class="input_container">
+          <mat-form-field [appearance]="form">
+            <input
+              matInput
+              placeholder="Name"
+              type="text"
+              name="Name"
+              id="field_name"
+              class="input_field"
+              formControlName="name"
+              autocomplete="off"
+              required
+            />
+            <mat-error *ngIf="updateForm.get('name').invalid">{{getErrorMessageName()}}</mat-error>
+            <mat-error *ngIf="updateForm.get('name').hasError('duplicate')">Name must be unique</mat-error>
+            <mat-error *ngIf="updateForm.get('name').hasError('nullValueName')">You must enter Name</mat-error>
+          </mat-form-field>
+        </div>
+        <br>
+        <div class="input_container">
+          <mat-form-field [appearance]="form">
+            <input
+              matInput
+              placeholder="keywords"
+              type="text"
+              name="Keywords"
+              class="input_field"
+              formControlName="keyword"
+              autocomplete="off"
+              required
+            />
+            <mat-error *ngIf="updateForm.get('keyword').invalid">{{getErrorMessageKeyword()}}</mat-error>
+          </mat-form-field>
+        </div>
+        <br>
+        <div class="input_container">
+          <mat-form-field [appearance]="form">
+            <input
+              matInput
+              placeholder="Bid Amount"
+              type="number"
+              name="Bid Amount"
+              class="input_field"
+              formControlName="bidAmount"
+              autocomplete="off"
+              required
+            />
+            <mat-error *ngIf="updateForm.get('bidAmount').invalid">{{getErrorMessageBidAmount()}}</mat-error>
+            <mat-error *ngIf="updateForm.get('bidAmount').hasError('lower')">Value must be bigger than 0</mat-error>
+            <mat-error *ngIf="updateForm.get('bidAmount').hasError('higher')">Value must be lower than 10000</mat-error>
+            <mat-error *ngIf="updateForm.get('bidAmount').hasError('nullValueBidAmount')">You must enter Bid Amount</mat-error>
+          </mat-form-field>
+        </div>
+        <br>
+
+        <div class="input_container">
+          <mat-form-field [appearance]="form">
+            <input
+              matInput
+              placeholder="Camp. Found"
+              type="number"
+              name="Campaign Found"
+              class="input_field"
+              formControlName="campaignFound"
+              autocomplete="off"
+              required
+            />
+            <mat-error *ngIf="updateForm.get('campaignFound').invalid">{{getErrorMessageCampaignFound()}}</mat-error>
+          </mat-form-field>
+        </div>
+        <br>
+
+        <div class="input_container" >
+          <mat-form-field [appearance]="form">
+
+            <select matNativeControl required class="input_field" formControlName="status" placeholder="On">
+              <option value="OFF">Off</option>
+              <option value="ON">On</option>
+            </select>
+
+          </mat-form-field>
+        </div>
+        <br>
+
+        <div class="input_container">
+          <mat-form-field [appearance]="form">
+            <select matNativeControl required class="input_field" formControlName="town" placeholder="Białystok">
+              <option value="Białystok"> Białystok</option>
+              <option value="Bydgoszcz"> Bydgoszcz</option>
+              <option value="Gdańsk"> Gdańsk</option>
+              <option value="Katowice"> Katowice</option>
+              <option value="Kielce"> Kielce</option>
+              <option value="Kraków"> Kraków</option>
+              <option value="Lublin"> Lublin</option>
+              <option value="Łódź"> Łódź</option>
+              <option value="Olsztyn"> Olsztyn</option>
+              <option value="Opole"> Opole</option>
+              <option value="Poznań"> Poznań</option>
+              <option value="Rzeszów"> Rzeszów</option>
+              <option value="Szczecin"> Szczecin</option>
+              <option value="Warszawa"> Warszawa</option>
+              <option value="Wrocław"> Wrocław</option>
+              <option value="Zielona Góra"> Zielona</option>
+            </select>
+
+          </mat-form-field>
+        </div>
+        <br>
+
+        <div class="input_container">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Radius"
+              type="number"
+              name="Radius"
+              class="input_field"
+              formControlName="radius"
+              autocomplete="off"
+              required
+            />
+            <mat-error *ngIf="updateForm.get('radius').invalid">{{getErrorMessageRadius()}}</mat-error>
+          </mat-form-field>
+        </div>
+        <br>
+
+        <button mat-raised-button type="submit" class="button" class="button" [disabled]="!updateForm.valid">Edit</button>
+
+      </div>
+    </form>
+  </div>
+</div>
+
