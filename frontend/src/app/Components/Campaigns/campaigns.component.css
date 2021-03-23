@@ -9,23 +9,6 @@ th.mat-sort-header-sorted {
   color: black;
 }
 
-.test{
-  overflow: scroll;
-  max-height: 220px;
-}
-
-th{
-  position: sticky;
-}
-
-.delete-button {
-  background-color: white;
-}
-
-.description{
-  padding-right: 240px;
-}
-
 .example-container .mat-form-field + .mat-form-field {
   margin-left: 8px;
 }
@@ -38,7 +21,6 @@ th{
   margin-top: 25px;
   display: flex;
   grid-gap: 3px;
-  /*padding: 1% 5%;*/
 }
 
 
@@ -61,7 +43,7 @@ th{
   cursor: pointer;
 }
 
-.input_container, #input_submit, .button{
+.input_container, #input_submit, #button{
   height: 50px;
   border-radius: 15px;
   width: 12%;
@@ -80,15 +62,15 @@ th{
 }
 
 .input_field:hover,
-.input_field:focus, .button {
+.input_field:focus, #button {
   outline: none;
 }
 
-.button {
+#button {
   font-size: 20px;
 }
 
-#input_submit, .button {
+#input_submit, #button {
   background-color: gray;
   padding-left: 0;
   font-weight: bold;
@@ -96,15 +78,13 @@ th{
   text-transform: uppercase;
 }
 
-#input_submit:hover, .button:hover {
+#input_submit:hover, #button:hover {
   background-color: #b5e7a0;
   transition: background-color, 1s;
   cursor: pointer;
 }
 
-h1,
-h3,
-span {
+h1 {
   text-align: center;
 }
 

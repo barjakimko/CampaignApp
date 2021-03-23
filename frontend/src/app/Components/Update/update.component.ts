@@ -41,7 +41,8 @@ export class UpdateComponent implements OnInit {
       town: [this.campaignToEdit.town, Validators.required],
       radius: [this.campaignToEdit.radius, Validators.required]
     }, {
-      validator: [this.checkInRange('bidAmount'), this.checkIfNameAvailable('name')]
+      validator: [this.checkInRange('bidAmount'), this.checkIfNameAvailable('name'),
+        this.checkNegRadius('radius'), this.checkNegCampFound('campaignFound')]
     });
   }
 
@@ -115,20 +116,33 @@ export class UpdateComponent implements OnInit {
         return nameInput.setErrors({nullValueName: true});
       }
 
-      // console.log(this.campaignsList);
-      //
-      // for (const entry of this.campaignsList) {
-      //   console.log(entry.name);
-      // }
-
       for (const entry of this.campaignsList) {
-        // console.log(entry.name);
-        // console.log(nameInput.value);
+
         if (entry.name === nameInput.value && entry.name !== this.campaignToEdit.name) {
           return nameInput.setErrors({duplicate: true});
         }
       }
       return nameInput.setErrors(null);
+    };
+  }
+
+  checkNegCampFound(camFound: string): any {
+    return (group: FormGroup) => {
+      const camFoundInput = group.controls[camFound];
+
+      if (camFoundInput.value < 0) {
+        return camFoundInput.setErrors({negativeCamFounds: true});
+      }
+    };
+  }
+
+  checkNegRadius(radius: string): any {
+    return (group: FormGroup) => {
+      const radiusInput = group.controls[radius];
+
+      if (radiusInput.value < 0) {
+        return radiusInput.setErrors({negativeRadius: true});
+      }
     };
   }
 

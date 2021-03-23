@@ -18,9 +18,10 @@ export class CampaignServiceService {
   }
 
   deleteCampaign(campaignId: number): void {
-    setTimeout(this.refresh, 500);
+
     this.http.delete('http://localhost:8080/api/v1/campaigns/' + campaignId)
       .subscribe(() => console.log('campaign deleted'));
+      setTimeout(this.refresh, 500);
   }
 
   addCampaign(campaign: { keyword: any; town: any; campaignFound: any;

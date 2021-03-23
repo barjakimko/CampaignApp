@@ -30,7 +30,7 @@ public class CampaignApplication {
                     "first",
                     10L,
                     10L,
-                    "ON",
+                    "Off",
                     "Kraków",
                     10L);
             NewCampaignDto campaign2 = new NewCampaignDto(
@@ -38,7 +38,7 @@ public class CampaignApplication {
                     "second",
                     20L,
                     20L,
-                    "ON",
+                    "On",
                     "Kraków",
                     20L);
             NewCampaignDto campaign3 = new NewCampaignDto(
@@ -46,7 +46,7 @@ public class CampaignApplication {
                     "third",
                     30L,
                     30L,
-                    "ON",
+                    "On",
                     "Kraków",
                     30L);
 

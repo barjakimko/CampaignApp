@@ -14,8 +14,18 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler({IdNotFoundException.class})
-    public ResponseEntity<String> handleNotFoundExceptions(IdNotFoundException exception) {
+    public ResponseEntity<String> handleNotFoundIdExceptions(IdNotFoundException exception) {
         return new ResponseEntity<>(exception.getMessage(), NOT_FOUND);
+    }
+
+    @ExceptionHandler({BudgetToLowException.class})
+    public ResponseEntity<String> handleToLowBudgetExceptions(BudgetToLowException exception) {
+        return new ResponseEntity<>(exception.getMessage(), NOT_ACCEPTABLE);
+    }
+
+    @ExceptionHandler({InvalidStatusException.class})
+    public ResponseEntity<String> handleToLowBudgetExceptions(InvalidStatusException exception) {
+        return new ResponseEntity<>(exception.getMessage(), NOT_ACCEPTABLE);
     }
 
     @ExceptionHandler({ConstraintViolationException.class})

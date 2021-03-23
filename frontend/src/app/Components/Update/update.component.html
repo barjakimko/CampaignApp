@@ -72,6 +72,8 @@
               required
             />
             <mat-error *ngIf="updateForm.get('campaignFound').invalid">{{getErrorMessageCampaignFound()}}</mat-error>
+            <mat-error *ngIf="updateForm.get('campaignFound').hasError('negativeCamFounds')">
+              Founds must be bigger then 0</mat-error>
           </mat-form-field>
         </div>
         <br>
@@ -80,8 +82,8 @@
           <mat-form-field [appearance]="form">
 
             <select matNativeControl required class="input_field" formControlName="status" placeholder="On">
-              <option value="OFF">Off</option>
-              <option value="ON">On</option>
+              <option value="Off">Off</option>
+              <option value="On">On</option>
             </select>
 
           </mat-form-field>
@@ -126,11 +128,13 @@
               required
             />
             <mat-error *ngIf="updateForm.get('radius').invalid">{{getErrorMessageRadius()}}</mat-error>
+            <mat-error *ngIf="updateForm.get('radius').hasError('negativeRadius')">
+              Radius must be bigger then 0</mat-error>
           </mat-form-field>
         </div>
         <br>
 
-        <button mat-raised-button type="submit" class="button" class="button" [disabled]="!updateForm.valid">Edit</button>
+        <button mat-raised-button type="submit" id="button" class="button" [disabled]="!updateForm.valid">Edit</button>
 
       </div>
     </form>

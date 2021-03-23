@@ -18,11 +18,10 @@ export class CampaignsComponent implements OnInit, AfterViewInit {
 
   campaignsList: Campaign[] = [];
   displayedColumns: string[] = ['id', 'name', 'keyword', 'bidAmount', 'campaignFound', 'status', 'town', 'radius', 'action'];
-  dataSource;
+  dataSource = new MatTableDataSource(this.campaignsList);
   budget: number;
 
   campaignToEdit: Campaign;
-
 
 
   addForm: FormGroup;
@@ -50,12 +49,14 @@ export class CampaignsComponent implements OnInit, AfterViewInit {
       town: this.town,
       radius: this.radius
     }, {
-      validator: [this.checkInRange('bidAmount'), this.checkIfNameAvailable('name')]
+      validator: [this.checkInRange('bidAmount'), this.checkIfNameAvailable('name'),
+        this.checkNegRadius('radius'), this.checkNegCampFound('campaignFound')]
     });
     this.campaignService.getCampaigns$().subscribe(
       value => {
         this.campaignsList = value;
         this.dataSource = new MatTableDataSource(this.campaignsList);
+        this.dataSource.sort = this.sort;
       }
     );
     this.campaignService.getBudget().subscribe(
@@ -70,7 +71,6 @@ export class CampaignsComponent implements OnInit, AfterViewInit {
 
   deleteCampaign(campaignId: number): void {
     this.campaignService.deleteCampaign(campaignId);
-    // this.campaignService.refresh();
   }
 
   getErrorMessageName(): string {
@@ -119,25 +119,11 @@ export class CampaignsComponent implements OnInit, AfterViewInit {
         radius: this.form.radius.value,
       }
     )
-      .subscribe(success => {
-        if (success) {
-          console.log('Campaign updated');
-        } else {
-          alert('Campaign updated failed');
-        }
-      }, (error: any) => {
-        console.log(error);
-      });
-    // this.campaignService.refresh();
   }
 
   checkInRange(amount: string): any {
     return (group: FormGroup) => {
       const amountInput = group.controls[amount];
-
-
-      console.log(amountInput.value);
-      console.log(amountInput.value.valueOf());
 
       if (amountInput.value === '') {
         return amountInput.setErrors({nullValueBidAmount: true});
@@ -153,21 +139,35 @@ export class CampaignsComponent implements OnInit, AfterViewInit {
     };
   }
 
+  checkNegCampFound(camFound: string): any {
+    return (group: FormGroup) => {
+      const camFoundInput = group.controls[camFound];
+
+      if (camFoundInput.value < 0) {
+        return camFoundInput.setErrors({negativeCamFounds: true});
+      }
+    };
+  }
+
+  checkNegRadius(radius: string): any {
+    return (group: FormGroup) => {
+      const radiusInput = group.controls[radius];
+
+      if (radiusInput.value < 0) {
+        return radiusInput.setErrors({negativeRadius: true});
+      }
+    };
+  }
+
   checkIfNameAvailable(name: string): any {
     return (group: FormGroup) => {
       const nameInput = group.controls[name];
       if (nameInput.value === '') {
         return nameInput.setErrors({nullValueName: true});
       }
-      console.log(this.campaignsList);
 
       for (const entry of this.campaignsList) {
-        console.log(entry.name);
-      }
 
-      for (const entry of this.campaignsList) {
-        console.log(entry.name);
-        console.log(nameInput.value);
         if (entry.name === nameInput.value) {
           return nameInput.setErrors({duplicate: true});
         }
